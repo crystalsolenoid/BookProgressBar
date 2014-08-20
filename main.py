@@ -1,6 +1,6 @@
 #import libraries
 import tkinter #GUI library
-import random #we all know this one
+import random
 
 #import other files from this project
 from BookBar import *
@@ -26,9 +26,15 @@ dBooks=[]
 #	list of chaper pages)
 #
 #the zeroith value in the list of chapter pages
-#	is the start of the introduction.
+#	is the start of the book's introduction.
 #	if the introduction starts before page 0
 #	(for example at page iv), i just set it to 0.
+#value 1 and onward are when the table of contents
+#	says that chapter starts.
+#	so list[3] would be the page chapter 3 starts on
+#
+#it'd be nice if we could detect when there's no introduction
+#	and not draw the introduction in that case
 
 #books Quin's currently reading for school
 dBooks.append(BookBar(window,
@@ -57,17 +63,27 @@ dBooks.append(BookBar(window,
 	'the holy greyhound',
 	[1,9,14,25,37,68,83,89,124,145,157,171]))
 
-#button actions
-def addBook(): #addBook isn't implemented yet
+
+#next thing to add: setting the page you're currently on
+#there's already a value stored with a default of zero
+#but i need to make a function for it in BookBar.py
+
+#
+#tkinter button actions
+#
+
+#addBook isn't implemented yet
+def addBook():
 	sBookName=input('name of book: ')
 	nBookPages=int(input('number of pages: '))
 	nProgress=0
+
+#goes through each book and tells it to draw itself
 def canvasRefresh():
 	for book in dBooks:
 		book.renderBook()
 
-
-#define the buttons
+#create the actual buttons
 buttonAddBook=tkinter.Button(window,text='Add A Book (not yet implemented)',command=addBook)
 buttonRefresh=tkinter.Button(window,text='Refresh Canvas',command=canvasRefresh)
 

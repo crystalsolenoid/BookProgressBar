@@ -20,6 +20,9 @@ class BookBar:
 		self.nCurrentPage = 0
 		self.tkLabel = tkinter.Label(tkWindow, text=self.sTitle)
 		self.tkCanvas = tkinter.Canvas(tkWindow, width=self.nWidth, height=self.nTotalHeight)
+	#
+	#draw the progress bar onto the tkinter canvas
+	#
 	def renderBook(self):
 		sColor = '' #initializes the random color
 		nLastPage = self.lChapters[len(self.lChapters) - 1] #find out how long the total bar is
@@ -56,7 +59,7 @@ class BookBar:
 		#
 		self.tkCanvas.create_rectangle(x0, y0, x, y, fill = 'red',outline = 'red')
 	#
-	#random color select
+	#random color selecter for renderBook()
 	#
 	def sSelectColor(self,sOldColor):
 		#sOldColor is the previous color generated with this function

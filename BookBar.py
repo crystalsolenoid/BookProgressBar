@@ -74,6 +74,11 @@ class BookBar:
 			sNewColor = random.choice(lColors)
 		return sNewColor
 	#
+	#changes the page you're currently on
+	#
+	def setProgress(self,nNewPage):
+		self.nCurrentPage = nNewPage
+	#
 	#pack to window
 	#
 	def pack(self):

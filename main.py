@@ -63,10 +63,13 @@ dBooks.append(BookBar(window,
 	'the holy greyhound',
 	[1,9,14,25,37,68,83,89,124,145,157,171]))
 
-
-#next thing to add: setting the page you're currently on
-#there's already a value stored with a default of zero
-#but i need to make a function for it in BookBar.py
+#
+#set the book progress for things I've started reading
+#
+#the emotional life of your BRAIN
+dBooks[0].setProgress(57)
+#general chemistry
+dBooks[1].setProgress(111)
 
 #
 #tkinter button actions

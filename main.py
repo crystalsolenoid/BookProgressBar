@@ -12,7 +12,6 @@ from BookBar import *
 #creates the window we're gonna render stuff on
 window=tkinter.Tk()
 
-
 #
 #create our BookBars
 #
@@ -63,6 +62,7 @@ dBooks.append(BookBar(window,
 	'the holy greyhound',
 	[1,9,14,25,37,68,83,89,124,145,157,171]))
 
+
 #
 #set the book progress for things I've started reading
 #
@@ -75,11 +75,11 @@ dBooks[1].setProgress(111)
 #tkinter button actions
 #
 
-#addBook isn't implemented yet
+#addBook is partially iplemented (no chapters yet)
 def addBook():
-	sBookName=input('name of book: ')
-	nBookPages=int(input('number of pages: '))
-	nProgress=0
+	dBooks.append(BookBar.usrMadeBookBar(window))
+	dBooks[len(dBooks)-1].pack()
+	canvasRefresh()
 
 #goes through each book and tells it to draw itself
 def canvasRefresh():
@@ -87,7 +87,7 @@ def canvasRefresh():
 		book.renderBook()
 
 #create the actual buttons
-buttonAddBook=tkinter.Button(window,text='Add A Book (not yet implemented)',command=addBook)
+buttonAddBook=tkinter.Button(window,text='Add A Book',command=addBook)
 buttonRefresh=tkinter.Button(window,text='Refresh Canvas',command=canvasRefresh)
 
 #define other display features

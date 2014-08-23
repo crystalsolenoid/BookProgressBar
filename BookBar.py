@@ -3,7 +3,7 @@ import random #we all know this one
 
 class BookBar:
 	#
-	#constructor
+	#regular constructor
 	#
 	def __init__(self,tkWindow,sNewTitle,lNewChapters):
 		#
@@ -20,6 +20,15 @@ class BookBar:
 		self.nCurrentPage = 0
 		self.tkLabel = tkinter.Label(tkWindow, text=self.sTitle)
 		self.tkCanvas = tkinter.Canvas(tkWindow, width=self.nWidth, height=self.nTotalHeight)
+	#
+	#text-prompted constructor
+	#
+	@classmethod
+	def usrMadeBookBar(cls,tkWindow):	
+		inBookName=input('name of book: ')
+		inBookLength=int(input('number of pages: '))
+		lLength=[0,inBookLength]
+		return(cls(tkWindow,inBookName,lLength))
 	#
 	#draw the progress bar onto the tkinter canvas
 	#

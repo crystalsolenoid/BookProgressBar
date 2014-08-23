@@ -5,7 +5,7 @@ class BookBar:
 	#
 	#regular constructor
 	#
-	def __init__(self,tkWindow,sNewTitle,lNewChapters):
+	def __init__(self,tkWindow,sNewTitle,lNewChapters,nProgress=0):
 		#
 		#generating dimensions for the progress bars
 		#
@@ -17,18 +17,72 @@ class BookBar:
 		#
 		self.sTitle = sNewTitle
 		self.lChapters = lNewChapters
-		self.nCurrentPage = 0
+		self.nCurrentPage = nProgress
 		self.tkLabel = tkinter.Label(tkWindow, text=self.sTitle)
 		self.tkCanvas = tkinter.Canvas(tkWindow, width=self.nWidth, height=self.nTotalHeight)
 	#
 	#text-prompted constructor
+	#***need to add error checking for user input***
 	#
 	@classmethod
-	def usrMadeBookBar(cls,tkWindow):	
-		inBookName=input('name of book: ')
-		inBookLength=int(input('number of pages: '))
-		lLength=[0,inBookLength]
-		return(cls(tkWindow,inBookName,lLength))
+	def usrMadeBookBar(cls, tkWindow):	
+		inBookName = input('name of book: ')
+		#walk user through the input process for specifying
+		#	the chapter pages of the book
+		lChapters = cls.usrInputChapters()
+		#checks what page the user is on
+		nPage = int(input('what page are you on?: '))
+		#return an instance of BookBar
+		return(cls(tkWindow, inBookName, lChapters, nPage))
+	#
+	#generate chapter page list from input
+	#(used for usrMadeBookBar)
+	#
+	@classmethod
+	def usrInputChapters(cls):
+		#start with an empty list
+		lChapters = []
+		#
+		#check if the book has an introduction and what page it starts on
+		#***need to add error checking for user input***
+		#
+		bIntroduction = input('does it have an introduction? y/n: ')
+		if bIntroduction == 'y':
+			bActualIntroduction = input('does the introduction start before page 1? y/n: ')
+			if bActualIntroduction == 'n':
+				#get what page the introduction starts on if it
+				#	starts after the page numbering starts 
+				nIntro = int(input('what page does it start on?: '))
+			else:
+				#for now, before-page-1 pages are set to 0
+				nIntro = 0
+		else:
+			#the introduction gets a spot in the page list
+			#	even if there isn't an introduction, because
+			#	that way the chapter numbers still match
+			#	their index number
+			nIntro = 0
+		#put whatever value obtained into the list
+		lChapters.append(nIntro)
+		#
+		#go through and get the start pages of each chapter
+		#***need to add error checking for user input***
+		#
+		nChapters = int(input('how many chapters does it have?: '))
+		#for each chapter, get what page it starts on
+		for chapter in range(1, nChapters + 1):
+			nPage = int(input('what page does chapter '+str(chapter)+' start on?: '))
+			#add page number to the page list
+			lChapters.append(nPage)
+		#
+		#get what page the book ends on
+		#***need to add error checking for user input***
+		#
+		nEndPage = int(input('what page does chapter '+str(nChapters)+' end on?: '))
+		#add page of end of book to page list
+		lChapters.append(nEndPage)
+		#returns list to be used in BookBar constructor
+		return(lChapters)
 	#
 	#draw the progress bar onto the tkinter canvas
 	#

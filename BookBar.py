@@ -17,9 +17,16 @@ class BookBar:
 		#
 		self.sTitle = sNewTitle
 		self.lChapters = lNewChapters
+		self.nPageOffset = self.nFixPageDisplay(self.lChapters)
 		self.nCurrentPage = nProgress
 		self.tkLabel = tkinter.Label(tkWindow, text=self.sTitle)
 		self.tkCanvas = tkinter.Canvas(tkWindow, width=self.nWidth, height=self.nTotalHeight)
+	#
+	#calculate how far page 0 is from the start of the introduction
+	#will be used to offset the display but preserve page numbers
+	#
+	def nFixPageDisplay(self, chapters):
+		return chapters[0] * -1
 	#
 	#text-prompted constructor
 	#***need to add error checking for user input***
@@ -54,8 +61,9 @@ class BookBar:
 				#	starts after the page numbering starts 
 				nIntro = int(input('what page does it start on?: '))
 			else:
-				#for now, before-page-1 pages are set to 0
-				nIntro = 0
+				#introductions before 0 are counted, but stored
+					#as negative page values
+				nIntro = int(input('how long is it?: ')) * -1
 		else:
 			#the introduction gets a spot in the page list
 			#	even if there isn't an introduction, because
@@ -81,6 +89,8 @@ class BookBar:
 		nEndPage = int(input('what page does chapter '+str(nChapters)+' end on?: '))
 		#add page of end of book to page list
 		lChapters.append(nEndPage)
+		#debug
+		print(str(lChapters)+" debug")
 		#returns list to be used in BookBar constructor
 		return(lChapters)
 	#
@@ -105,9 +115,9 @@ class BookBar:
 			#
 			#draw that part of the bar in a random color
 			#
-			x0 = self.nPadding + (nStart * nPageScale)
+			x0 = self.nPadding + ((nStart+self.nPageOffset) * nPageScale)
 			y0 = self.nPadding + self.nBookmarkOffset
-			x = self.nPadding + (nEnd * nPageScale)
+			x = self.nPadding + ((nEnd+self.nPageOffset) * nPageScale)
 			y = self.nPadding + self.nBookmarkOffset + self.nBarHeight
 			sColor = self.sSelectColor(sColor) #generates a random color
 			#
@@ -115,9 +125,9 @@ class BookBar:
 		#
 		#draw the bookmark (current progress)
 		#
-		x0 = self.nPadding + (self.nCurrentPage * nPageScale) - 1
+		x0 = self.nPadding + ((self.nCurrentPage+self.nPageOffset) * nPageScale) - 1
 		y0 = self.nPadding
-		x = self.nPadding + (self.nCurrentPage * nPageScale) + 1
+		x = self.nPadding + ((self.nCurrentPage+self.nPageOffset) * nPageScale) + 1
 		y = self.nPadding + self.nBarHeight + (self.nBookmarkOffset * 2)
 		#
 		self.tkCanvas.create_rectangle(x0, y0, x, y, fill = 'red',outline = 'red')

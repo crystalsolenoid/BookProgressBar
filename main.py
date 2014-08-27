@@ -36,31 +36,31 @@ dBooks=[]
 #	and not draw the introduction in that case
 
 #books Quin's currently reading for school
-dBooks.append(BookBar(window,
-	'the emotional life of your BRAIN',
-	[0,1,13,43,67,91,113,137,161,177,199,225,253]))
+dBooks.append( BookBar(window,
+ 	'the emotional life of your BRAIN',
+ 	[0,1,13,43,67,91,113,137,161,177,199,225,253]) )
 
-dBooks.append(BookBar(window,
+dBooks.append( BookBar(window,
 	'general chemistry',
 	[0,1,34,68,111,151,192,241,294,360,395,449,498,
 	557,602,665,697,745,784,819,863,917,976,1031,1069,
-	1111,1147,1208,1266]))
+	1111,1147,1208,1266]) )
 
-dBooks.append(BookBar(window,
+dBooks.append( BookBar(window,
 	'geoffrey of monmouth',
-	[53,75,107,149,170,186,212,262,285]))
+	[53,75,107,149,170,186,212,262,285]) )
 
-dBooks.append(BookBar(window,
+dBooks.append( BookBar(window,
 	'ibn fadlan and the land of darkness',
-	[0,1,59,93,201]))
+	[0,1,59,93,201]) )
 
-dBooks.append(BookBar(window,
+dBooks.append( BookBar(window,
 	'agricola and germany',
-	[0,1,35,63]))
+	[-29,1,35,63],1) )
 
-dBooks.append(BookBar(window,
+dBooks.append( BookBar(window,
 	'the holy greyhound',
-	[1,9,14,25,37,68,83,89,124,145,157,171]))
+	[1,9,14,25,37,68,83,89,124,145,157,171]) )
 
 
 #
